@@ -7,7 +7,7 @@ class User < ApplicationRecord
     
     validates :fullname, presence: true, length: {maximum: 50}
     
-    has_many :rooms
+    has_many :events
     has_many :reservations
     
     has_many :guest_reviews, class_name: "GuestReview", foreign_key: "guest_id"

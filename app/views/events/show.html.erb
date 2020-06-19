@@ -1,7 +1,7 @@
 <!-- Image -->
 <div class="row">
     <div class="col-md-12">
-        <%= image_tag @room.cover_photo(nil), width: "100%" %>
+        <%= image_tag @event.cover_photo(nil), width: "100%" %>
     </div>
 </div>
 <br/>
@@ -14,17 +14,17 @@
         <!-- Listing Name -->
         <div class="row">
             <div class="col-md-8">
-                <h1><%= @room.listing_name %></h1>
-                <%= @room.address %>
+                <h1><%= @event.listing_name %></h1>
+                <%= @event.address %>
             </div>
             <div class="col-md-4 text-center">
-                <%= image_tag avatar_url(@room.user), class: "img-circle avatar-large" %><br/><br/>
-                <%= @room.user.fullname %>
+                <%= image_tag avatar_url(@event.user), class: "img-circle avatar-large" %><br/><br/>
+                <%= @event.user.fullname %>
             </div>
         </div>
         <hr/>
         
-        <!-- Room Info -->
+        <!-- Event Info -->
         <div class="row text-babu">
             <div class="row text-center row-space-1">
                 <div class="col-md-3">
@@ -42,10 +42,10 @@
             </div>
             
             <div class="row text-center">
-                <div class="col-md-3"><%= @room.home_type %></div>
-                <div class="col-md-3"><%= pluralize(@room.accommodate, "Guest") %></div>
-                <div class="col-md-3"><%= pluralize(@room.bed_room, "Bedroom") %></div>
-                <div class="col-md-3"><%= pluralize(@room.bath_room, "Bathroom") %></div>
+                <div class="col-md-3"><%= @event.home_type %></div>
+                <div class="col-md-3"><%= pluralize(@event.accommodate, "Guest") %></div>
+                <div class="col-md-3"><%= pluralize(@event.bed_room, "Bedroom") %></div>
+                <div class="col-md-3"><%= pluralize(@event.bath_room, "Bathroom") %></div>
             </div>
         
         </div>
@@ -55,7 +55,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>About This Listing</h3>
-                <p><%= @room.summary %></p>
+                <p><%= @event.summary %></p>
             </div>
         </div>
         <hr/>
@@ -70,15 +70,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ul class="amenities">
-                            <li class="<%= 'text-line-through' if !@room.is_tv %>">TV</li>
-                            <li class="<%= 'text-line-through' if !@room.is_kitchen %>">Kitchen</li>
-                            <li class="<%= 'text-line-through' if !@room.is_internet %>">Internet</li>
+                            <li class="<%= 'text-line-through' if !@event.is_tv %>">TV</li>
+                            <li class="<%= 'text-line-through' if !@event.is_kitchen %>">Kitchen</li>
+                            <li class="<%= 'text-line-through' if !@event.is_internet %>">Internet</li>
                         </ul>
                     </div>
                     <div class="col-md-6">
                         <ul class="amenities">
-                            <li class="<%= 'text-line-through' if !@room.is_heating %>">Heating</li>
-                            <li class="<%= 'text-line-through' if !@room.is_air %>">Air Conditioning</li>
+                            <li class="<%= 'text-line-through' if !@event.is_heating %>">Heating</li>
+                            <li class="<%= 'text-line-through' if !@event.is_air %>">Air Conditioning</li>
                         </ul>
                     </div>
                 
@@ -147,7 +147,7 @@
             <script src="https://maps.googleapis.com/maps/api/js"></script>
             <script>
                 function initialize() {
-                    var location = {lat: <%= @room.latitude %>, lng: <%= @room.longitude %>};
+                    var location = {lat: <%= @event.latitude %>, lng: <%= @event.longitude %>};
                     var map = new google.maps.Map(document.getElementById('map'), {
                         center: location,
                         zoom: 14
@@ -159,7 +159,7 @@
                     });
 
                     var infoWindow = new google.maps.InfoWindow({
-                        content: '<div id="content"><%= image_tag @room.cover_photo(:medium) %></div>'
+                        content: '<div id="content"><%= image_tag @event.cover_photo(:medium) %></div>'
                     });
 
                     infoWindow.open(map, marker);
@@ -184,6 +184,6 @@
     $('#average_rating').raty({
         path: '/assets',
         readOnly: true,
-        score: <%= @room.average_rating %>
+        score: <%= @event.average_rating %>
     });
 </script>

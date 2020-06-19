@@ -18,7 +18,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <button class="btn btn-form btn-small">
-                        <%= link_to "Host an Event", new_room_path, style: "color: white; text-decoration: none;" %>
+                        <%= link_to "Host an Event", new_event_path, style: "color: white; text-decoration: none;" %>
                     </button>
                 </li>
                 
@@ -34,8 +34,8 @@
                             <%= current_user.fullname %> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><%= link_to "Manage Listing", rooms_path %></li>
-                            <li><%= link_to "List Your Space", new_room_path %></li>
+                            <li><%= link_to "Manage Listing", events_path %></li>
+                            <li><%= link_to "List Your Space", new_event_path %></li>
                             <li><%= link_to "Your Reservations", your_reservations_path %></li>
                             <li><%= link_to "Your Trips", your_trips_path %></li>
                             <li role="separator" class="divider"></li>

@@ -3,7 +3,7 @@
 one:
   comment: MyText
   star: 1
-  room: one
+  event: one
   reservation: one
   guest: one
   host: one
@@ -12,7 +12,7 @@ one:
 two:
   comment: MyText
   star: 1
-  room: two
+  event: two
   reservation: two
   guest: two
   host: two

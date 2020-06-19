@@ -1,10 +1,10 @@
 $('#photos').html("<%= j render 'photos_list' %>")
-<% if @room.photos.blank? %>
-  $('#photo_check').hide();
+<% if @event.photos.blank? %>
+$('#photo_check').hide();
 <% end %>
 
-<% if !@room.active && !@room.price.blank? && !@room.listing_name.blank? && !@room.photos.blank? && !@room.address.blank? %>
-    $('#publish_button').attr('disabled', false);
+<% if !@event.active && !@event.price.blank? && !@event.listing_name.blank? && !@event.photos.blank? && !@event.address.blank? %>
+$('#publish_button').attr('disabled', false);
 <% else %>
-    $('#publish_button').attr('disabled', true);
+$('#publish_button').attr('disabled', true);
 <% end %>

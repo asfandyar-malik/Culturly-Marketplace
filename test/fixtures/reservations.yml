@@ -2,7 +2,7 @@
 
 one:
   user: one
-  room: one
+  event: one
   start_date: 2017-06-06 16:08:55
   end_date: 2017-06-06 16:08:55
   price: 1
@@ -10,7 +10,7 @@ one:
 
 two:
   user: two
-  room: two
+  event: two
   start_date: 2017-06-06 16:08:55
   end_date: 2017-06-06 16:08:55
   price: 1
