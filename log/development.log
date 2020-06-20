@@ -21039,3 +21039,385 @@ Migrating to EditEventsTable (20200620115628)
             FROM sqlite_temp_master
             WHERE name='index_users_on_email' AND type='index'
 [0m
+Started GET "/" for 127.0.0.1 at 2020-06-20 14:14:22 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."active" = ? LIMIT ?[0m  [["active", "t"], ["LIMIT", 3]]
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (34.2ms)
+  Rendered pages/home.html.erb within layouts/application (35.2ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendered shared/_navbar.html.erb (12.9ms)
+  Rendered shared/_message.html.erb (0.5ms)
+Completed 200 OK in 85ms (Views: 75.2ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/search?utf8=%E2%9C%93&search=&start_date=&end_date=&commit=Search" for 127.0.0.1 at 2020-06-20 14:14:25 +0200
+Processing by PagesController#search as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"", "start_date"=>"", "end_date"=>"", "commit"=>"Search"}
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."active" = ?[0m  [["active", "t"]]
+  Rendering pages/search.html.erb within layouts/application
+  [1m[36mPhoto Load (0.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (6.5ms)
+  Rendered pages/search.html.erb within layouts/application (15.4ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendered shared/_navbar.html.erb (3.1ms)
+  Rendered shared/_message.html.erb (0.4ms)
+Completed 200 OK in 63ms (Views: 58.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2020-06-20 14:14:27 +0200
+Processing by EventsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering events/new.html.erb within layouts/application
+  Rendered events/new.html.erb within layouts/application (13.1ms)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `room_type' for #<Event:0x007f1c09b26f48>
+Did you mean?  home_type):
+    20:                     <div class="col-md-4 select">
+    21:                         <div class="form-group">
+    22:                             <label>Event Type</label>
+    23:                             <%= f.select :room_type, [["Entire", "Entire"], ["Private", "Private"], ["Shared", "Shared"]],
+    24:                                          id: "room_type", prompt: "Select...", class: "form-control" %>
+    25:                         </div>
+    26:                     </div>
+  
+app/views/events/new.html.erb:23:in `block in _app_views_events_new_html_erb__3553645241288463922_69879199141780'
+app/views/events/new.html.erb:8:in `_app_views_events_new_html_erb__3553645241288463922_69879199141780'
+  Rendering /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.0ms)
+  Rendering /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendering /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.4ms)
+  Rendered /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (15.4ms)
+Started GET "/events/new" for 127.0.0.1 at 2020-06-20 14:24:53 +0200
+Processing by EventsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering events/new.html.erb within layouts/application
+  Rendered events/new.html.erb within layouts/application (3.3ms)
+  Rendered shared/_navbar.html.erb (3.0ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 66ms (Views: 39.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2020-06-20 14:25:59 +0200
+Processing by EventsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering events/new.html.erb within layouts/application
+  Rendered events/new.html.erb within layouts/application (2.0ms)
+  Rendered shared/_navbar.html.erb (1.6ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 43ms (Views: 40.9ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-06-20 18:34:41 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mEvent Load (2.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."active" = ? LIMIT ?[0m  [["active", "t"], ["LIMIT", 3]]
+  [1m[36mPhoto Load (0.6ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.3ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (58.2ms)
+  Rendered pages/home.html.erb within layouts/application (63.9ms)
+  Rendered shared/_navbar.html.erb (3.2ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 428ms (Views: 405.8ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-06-20 18:34:41 +0200
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."active" = ? LIMIT ?[0m  [["active", "t"], ["LIMIT", 3]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (9.3ms)
+  Rendered pages/home.html.erb within layouts/application (10.7ms)
+  Rendered shared/_navbar.html.erb (1.8ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 79ms (Views: 77.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-06-20 18:34:41 +0200
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."active" = ? LIMIT ?[0m  [["active", "t"], ["LIMIT", 3]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (8.6ms)
+  Rendered pages/home.html.erb within layouts/application (9.7ms)
+  Rendered shared/_navbar.html.erb (1.6ms)
+  Rendered shared/_message.html.erb (0.5ms)
+Completed 200 OK in 73ms (Views: 71.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/search?utf8=%E2%9C%93&search=&start_date=&end_date=&commit=Search" for 127.0.0.1 at 2020-06-20 18:34:52 +0200
+Processing by PagesController#search as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"", "start_date"=>"", "end_date"=>"", "commit"=>"Search"}
+  [1m[36mEvent Load (0.4ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."active" = ?[0m  [["active", "t"]]
+  Rendering pages/search.html.erb within layouts/application
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (13.3ms)
+  Rendered pages/search.html.erb within layouts/application (35.1ms)
+  Rendered shared/_navbar.html.erb (1.1ms)
+  Rendered shared/_message.html.erb (0.2ms)
+Completed 200 OK in 108ms (Views: 76.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/events/3" for 127.0.0.1 at 2020-06-20 18:34:54 +0200
+Processing by EventsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mEvent Load (0.6ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering events/show.html.erb within layouts/application
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered reviews/_guest_list.html.erb (1.1ms)
+  Rendered reservations/_form.html.erb (9.0ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/show.html.erb within layouts/application (39.7ms)
+  Rendered shared/_navbar.html.erb (1.2ms)
+  Rendered shared/_message.html.erb (0.2ms)
+Completed 200 OK in 79ms (Views: 70.8ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/events/3/preload" for 127.0.0.1 at 2020-06-20 18:34:54 +0200
+Processing by EventsController#preload as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mEvent Load (0.8ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2020-06-20 18:35:10 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/sessions/new.html.erb within layouts/application (9.0ms)
+  Rendered shared/_navbar.html.erb (1.1ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 61ms (Views: 56.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2020-06-20 18:35:54 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/sessions/new.html.erb within layouts/application (1.0ms)
+  Rendered shared/_navbar.html.erb (1.1ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 32ms (Views: 31.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-06-20 18:36:39 +0200
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uuDQ0Lu3ZkQEL1yFxz6k929Z3Jxz4tg1Ul9lJ9DWN7GkR27E//aiL7SL4zvaN8tIzhcX18W9Ag2yWLbJhH92kw==", "user"=>{"email"=>"asfandyar@culturly.de", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "asfandyar@culturly.de"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.2ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uuDQ0Lu3ZkQEL1yFxz6k929Z3Jxz4tg1Ul9lJ9DWN7GkR27E//aiL7SL4zvaN8tIzhcX18W9Ag2yWLbJhH92kw==", "user"=>{"email"=>"asfandyar@culturly.de", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/sessions/new.html.erb within layouts/application (1.4ms)
+  Rendered shared/_navbar.html.erb (2.0ms)
+  Rendered shared/_message.html.erb (0.5ms)
+Completed 200 OK in 132ms (Views: 32.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2020-06-20 18:36:53 +0200
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hNClUyAHkJ1sDg5Soz+LCwH9Z+cnw8Q3cc2wGP/74BmadxtHZEZU9tyqsey+NuS0oLOsrJGcHg+RymP2q1KhOw==", "user"=>{"email"=>"asfandyar@culturly.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "asfandyar@culturly.com"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = ?, "last_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", "2020-06-20 16:36:53.907063"], ["last_sign_in_at", "2020-06-19 13:24:59.718166"], ["sign_in_count", 3], ["updated_at", "2020-06-20 16:36:53.907879"], ["id", 3]]
+  [1m[35m (10.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 113ms (ActiveRecord: 11.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-06-20 18:36:53 +0200
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."active" = ? LIMIT ?[0m  [["active", "t"], ["LIMIT", 3]]
+  [1m[36mPhoto Load (0.0ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (4.7ms)
+  Rendered pages/home.html.erb within layouts/application (5.6ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendered shared/_navbar.html.erb (2.1ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 41ms (Views: 39.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/events/3" for 127.0.0.1 at 2020-06-20 18:37:11 +0200
+Processing by EventsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mEvent Load (0.5ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering events/show.html.erb within layouts/application
+  [1m[36mPhoto Load (0.5ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered reviews/_guest_list.html.erb (2.0ms)
+  Rendered reservations/_form.html.erb (2.9ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/show.html.erb within layouts/application (24.2ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendered shared/_navbar.html.erb (2.3ms)
+  Rendered shared/_message.html.erb (0.2ms)
+Completed 200 OK in 69ms (Views: 63.1ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/events/3/preload" for 127.0.0.1 at 2020-06-20 18:37:12 +0200
+Processing by EventsController#preload as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mReservation Load (26.4ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."event_id" = ? AND (start_date >= '2020-06-20' OR end_date >= '2020-06-20')[0m  [["event_id", 3]]
+Completed 200 OK in 29ms (Views: 0.5ms | ActiveRecord: 26.7ms)
+
+
+Started GET "/events/3/preview?start_date=Sat+Jun+20+2020+00%3A00%3A00+GMT%2B0200+(Central+European+Summer+Time)&end_date=" for 127.0.0.1 at 2020-06-20 18:37:16 +0200
+Processing by EventsController#preview as */*
+  Parameters: {"start_date"=>"Sat Jun 20 2020 00:00:00 GMT+0200 (Central European Summer Time)", "end_date"=>"", "id"=>"3"}
+  [1m[36mEvent Load (0.6ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.8ms)
+
+
+  
+ArgumentError (invalid date):
+  
+app/controllers/events_controller.rb:71:in `parse'
+app/controllers/events_controller.rb:71:in `preview'
+  Rendering /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.5ms)
+  Rendering /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.5ms)
+  Rendering /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.5ms)
+  Rendered /home/asfandyar/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (13.1ms)
+Started GET "/events/3/preview?start_date=Sat+Jun+20+2020+00%3A00%3A00+GMT%2B0200+(Central+European+Summer+Time)&end_date=Tue+Jun+23+2020+00%3A00%3A00+GMT%2B0200+(Central+European+Summer+Time)" for 127.0.0.1 at 2020-06-20 18:37:18 +0200
+Processing by EventsController#preview as */*
+  Parameters: {"start_date"=>"Sat Jun 20 2020 00:00:00 GMT+0200 (Central European Summer Time)", "end_date"=>"Tue Jun 23 2020 00:00:00 GMT+0200 (Central European Summer Time)", "id"=>"3"}
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reservations" WHERE "reservations"."event_id" = ? AND ('2020-06-20' < start_date AND end_date < '2020-06-23')[0m  [["event_id", 3]]
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/events/3/reservations" for 127.0.0.1 at 2020-06-20 18:37:24 +0200
+Processing by ReservationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kbji0ExDhn+Drl+9FlOR+yHViADEyfuG3OYUTua1RpRKMqps3ApeRYhhPN5MMFJNOFX0iFYWKID3jkaE8ol/2w==", "reservation"=>{"start_date"=>"20-06-2020", "end_date"=>"23-06-2020"}, "commit"=>"Book Now", "event_id"=>"3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "reservations" ("user_id", "event_id", "start_date", "end_date", "price", "total", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["event_id", 3], ["start_date", "2020-06-20 00:00:00"], ["end_date", "2020-06-23 00:00:00"], ["price", 100], ["total", 400], ["created_at", "2020-06-20 16:37:24.940740"], ["updated_at", "2020-06-20 16:37:24.940740"]]
+  [1m[35m (9.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://0.0.0.0:3000/events/3
+Completed 302 Found in 31ms (ActiveRecord: 12.4ms)
+
+
+Started GET "/events/3" for 127.0.0.1 at 2020-06-20 18:37:24 +0200
+Processing by EventsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mEvent Load (0.5ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering events/show.html.erb within layouts/application
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered reviews/_guest_list.html.erb (1.9ms)
+  Rendered reservations/_form.html.erb (2.8ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/show.html.erb within layouts/application (16.6ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendered shared/_navbar.html.erb (3.5ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 62ms (Views: 58.4ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/events/3/preload" for 127.0.0.1 at 2020-06-20 18:37:25 +0200
+Processing by EventsController#preload as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mEvent Load (0.2ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mReservation Load (0.2ms)[0m  [1m[34mSELECT "reservations".* FROM "reservations" WHERE "reservations"."event_id" = ? AND (start_date >= '2020-06-20' OR end_date >= '2020-06-20')[0m  [["event_id", 3]]
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-06-20 18:37:47 +0200
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mEvent Load (0.7ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."active" = ? LIMIT ?[0m  [["active", "t"], ["LIMIT", 3]]
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (17.0ms)
+  Rendered pages/home.html.erb within layouts/application (22.1ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendered shared/_navbar.html.erb (2.2ms)
+  Rendered shared/_message.html.erb (0.2ms)
+Completed 200 OK in 66ms (Views: 61.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2020-06-20 18:38:02 +0200
+Processing by EventsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering events/new.html.erb within layouts/application
+  Rendered events/new.html.erb within layouts/application (4.0ms)
+  Rendered shared/_navbar.html.erb (1.6ms)
+  Rendered shared/_message.html.erb (0.4ms)
+Completed 200 OK in 55ms (Views: 48.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2020-06-20 18:38:51 +0200
+Processing by EventsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering events/new.html.erb within layouts/application
+  Rendered events/new.html.erb within layouts/application (9.1ms)
+  Rendered shared/_navbar.html.erb (1.6ms)
+  Rendered shared/_message.html.erb (0.3ms)
+Completed 200 OK in 70ms (Views: 63.2ms | ActiveRecord: 0.5ms)
+
+

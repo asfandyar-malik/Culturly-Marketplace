@@ -8,8 +8,8 @@ class Event < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
-  validates :home_type, presence: true
-  validates :room_type, presence: true
+  validates :language, presence: true
+  validates :event_type, presence: true
   validates :accommodate, presence: true
   validates :bed_room, presence: true
   validates :bath_room, presence: true

@@ -14,20 +14,21 @@
                     <%= form_for @event do |f| %>
                         
                         <div class="row">
-                            
                             <div class="col-md-4 select">
                                 <div class="form-group">
                                     <label>Event Type</label>
-                                    <%= f.select :home_type, [["Apartment", "Apartment"], ["House", "House"], ["Bed & Breakfast", "Bed & Breakfast"]],
-                                                 id: "home_type", prompt: "Select...", class: "form-control" %>
+                                    <%= f.select :event_type, [
+                                        ["Art & Design", "Art & Design"], ["Culture & History", "Culture & History"], ["Comedy", "Comedy"],
+                                        ["Dance", "Dance"], ["Magic", "Magic"], ["Music", "Music"], ["Drink", "Drink"],["Food", "Food"], ["Fitness", "Fitness"]],
+                                                 id: "event_type", prompt: "Select...", class: "form-control" %>
                                 </div>
                             </div>
-                            
+    
                             <div class="col-md-4 select">
                                 <div class="form-group">
-                                    <label>Event Type</label>
-                                    <%= f.select :room_type, [["Entire", "Entire"], ["Private", "Private"], ["Shared", "Shared"]],
-                                                 id: "room_type", prompt: "Select...", class: "form-control" %>
+                                    <label>Language</label>
+                                    <%= f.select :language, [["English", "English"], ["German", "German"]],
+                                                 id: "language", prompt: "Select...", class: "form-control" %>
                                 </div>
                             </div>
                             

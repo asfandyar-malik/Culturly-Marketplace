@@ -1,3 +1,5 @@
 tmp*
 log*
 /log*
+.idea/*
+.idea*
