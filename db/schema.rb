@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200619155412) do
+ActiveRecord::Schema.define(version: 20200620115628) do
 
   create_table "events", force: :cascade do |t|
     t.string   "home_type"
-    t.string   "room_type"
+    t.string   "event_type"
     t.integer  "accommodate"
     t.integer  "bed_room"
     t.integer  "bath_room"
@@ -29,10 +29,17 @@ ActiveRecord::Schema.define(version: 20200619155412) do
     t.integer  "price"
     t.boolean  "active"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "description"
+    t.string   "language"
+    t.string   "duration"
+    t.string   "location"
+    t.string   "group_size"
+    t.string   "what_to_bring"
+    t.string   "tag"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 

@@ -20881,3 +20881,161 @@ Processing by EventsController#new as HTML
 Completed 200 OK in 64ms (Views: 58.8ms | ActiveRecord: 0.4ms)
 
 
+Started GET "/" for 127.0.0.1 at 2020-06-20 13:52:05 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."active" = ? LIMIT ?[0m  [["active", "t"], ["LIMIT", 3]]
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 2]]
+  [1m[36mPhoto Load (0.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" WHERE "photos"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."type" IN ('GuestReview') AND "reviews"."event_id" = ?[0m  [["event_id", 3]]
+  Rendered events/_events_list.html.erb (42.4ms)
+  Rendered pages/home.html.erb within layouts/application (45.8ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  Rendered shared/_navbar.html.erb (10.3ms)
+  Rendered shared/_message.html.erb (0.6ms)
+Completed 200 OK in 275ms (Views: 259.2ms | ActiveRecord: 2.2ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to EditEventsTable (20200620115628)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "home_type" varchar, "event_type" varchar, "accommodate" integer, "bed_room" integer, "bath_room" integer, "listing_name" varchar, "summary" text, "address" varchar, "is_tv" boolean, "is_kitchen" boolean, "is_air" boolean, "is_heating" boolean, "is_internet" boolean, "price" integer, "active" boolean, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "latitude" float, "longitude" float)[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_aevents_on_user_id" ON "aevents" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aevents" ("id","home_type","event_type","accommodate","bed_room","bath_room","listing_name","summary","address","is_tv","is_kitchen","is_air","is_heating","is_internet","price","active","user_id","created_at","updated_at","latitude","longitude")
+                     SELECT "id","home_type","room_type","accommodate","bed_room","bath_room","listing_name","summary","address","is_tv","is_kitchen","is_air","is_heating","is_internet","price","active","user_id","created_at","updated_at","latitude","longitude" FROM "events"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "events"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "home_type" varchar, "event_type" varchar, "accommodate" integer, "bed_room" integer, "bath_room" integer, "listing_name" varchar, "summary" text, "address" varchar, "is_tv" boolean, "is_kitchen" boolean, "is_air" boolean, "is_heating" boolean, "is_internet" boolean, "price" integer, "active" boolean, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "latitude" float, "longitude" float)[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_aevents_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_aevents_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_events_on_user_id" ON "events" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "events" ("id","home_type","event_type","accommodate","bed_room","bath_room","listing_name","summary","address","is_tv","is_kitchen","is_air","is_heating","is_internet","price","active","user_id","created_at","updated_at","latitude","longitude")
+                     SELECT "id","home_type","event_type","accommodate","bed_room","bath_room","listing_name","summary","address","is_tv","is_kitchen","is_air","is_heating","is_internet","price","active","user_id","created_at","updated_at","latitude","longitude" FROM "aevents"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aevents"[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "events" ADD "description" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "events" ADD "language" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "events" ADD "duration" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "events" ADD "location" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "events" ADD "group_size" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "events" ADD "what_to_bring" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "events" ADD "tag" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200620115628"]]
+  [1m[35m (29.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_events_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_events_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_photos_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_photos_on_event_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reservations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reservations_on_event_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reservations_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reservations_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_event_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_host_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_host_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_guest_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_guest_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_reviews_on_reservation_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_reviews_on_reservation_id' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_confirmation_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_confirmation_token' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
